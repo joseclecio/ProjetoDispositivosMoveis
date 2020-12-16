@@ -1,0 +1,102 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #FAFAFA;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-top: 10%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #00AA8D;
+  width: 100%;
+  height: 70px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.26);
+  color: #fff;
+}
+
+.header > h1 {
+  font-size: 34px;
+  font-weight: normal;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.input-box-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-control {
+  margin-bottom: 10px;
+}
+
+.output-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.imc-field {
+  font-weight: bold;
+  font-size: 5em;
+  line-height: 1.2;
+  transition: color 2s ease;
+  margin: 0;
+}
+
+.imc-field.is-good {
+  color: #4CAF50;
+}
+
+.imc-field.is-worrying {
+  color: #FF9800;
+}
+
+.imc-field.is-bad {
+  color: #F44336;
+}
+
+.stat-field {
+  font-family: 'Roboto', sans-serif;
+	font-size: 2em;
+	font-weight: 500;
+  margin: 0;
+}
+
+.input {
+  width: 300px;
+  background-color: #fff;
+  border-radius: 21px;
+  border: 1px solid #21272b;
+  box-sizing: border-box;
+  color: #14171a;
+  font-size: 1.5em;
+  line-height: 18px;
+  padding: 10px;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.label {
+  font-size: 1.3em;
+  margin-left: 10px;
+}

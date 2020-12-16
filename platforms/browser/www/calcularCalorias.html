@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="stylesheet" href="css/calcularCalorias.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--função para desativar o botão voltar do cell-->
+    <script type="text/javascript" charset="utf-8" src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/jquery.mobile-1.3.2.min.js "></script>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        // Wait for device API libraries to load
+        //
+        document.addEventListener("deviceready", onDeviceReady, false);
+        // device APIs are available
+        // 
+        function onDeviceReady() {
+            document.addEventListener("backbutton", onBackKeyDown, false);
+        }
+        // Handle the back button
+        //
+        function onBackKeyDown() {
+            // navigator.app.exitApp();
+        }
+    </script>
+    <title>Salvando Dados no Firebase</title>
+</head>
+
+<body onselectstart="return false">
+    <!-- Just an image -->
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html">
+            <i class="fa fa-chevron-circle-left" style="font-size: 30pt;"></i>
+        </a>
+    </nav>
+
+
+    <div id="main">
+
+        <form id="form01">
+            <div class="inner">
+                <b style="text-align: center;">Informe seu peso, sexo e idade.</b><br><br>
+                <div class="selector_wrapper">
+                    <span><b>Você é: </b></span><br>
+                    <label><input type="radio" name="gender" id="male" checked><b>Homem</b></label>
+                    <label><input type="radio" name="gender" id="female"><b> Mulher</b></label>
+                    <br><br>
+                    <span><b>Minha idade é:</b></span>
+                    <select name="select" id="age_select">
+                        <option value="value1" selected>14</option>
+                    </select> anos
+                    <br><br>
+                    <span><b>Meu peso é:</b></span>
+                    <select name="select" id="weight_select">
+                        <option value="value1" selected>30</option>
+                    </select> kg
+                    <br><br>
+                    <span><b>Minha altura é:</b></span>
+                    <select name="select" id="height_select">
+                        <option value="value1" selected>120</option>
+                    </select> cm
+                    <br><br>
+                </div>
+            </div>
+        </form>
+
+        <form id="form02">
+            <div class="inner">
+                <b><p style="text-align: justify;">Selecione aquele que melhor corresponde ao seu nível de atividade
+                    física.</p></b>
+                <div class="activity_selector">
+                    <strong>Sedentário</strong><br>
+                    <small>Pouco ou Nenhum Exercício</small>
+                </div>
+                <div class="activity_selector">
+                    <strong>Levemente Ativo</strong><br>
+                    <small>Exercícios Leves/Esportes 1-3 Dias Por Semana</small>
+                </div>
+                <div class="activity_selector">
+                    <strong>Moderadamente Ativo</strong><br>
+                    <small>Exercícios Moderados/Esportes 3-5 Dias Por Semana</small>
+                </div>
+                <div class="activity_selector">
+                    <strong>Muito Ativo</strong><br>
+                    <small>Exercício Duro/Esportes 6-7 Dias Por Semana</small>
+                </div>
+                <div class="activity_selector">
+                    <strong>Extra Ativo</strong><br>
+                    <small>Exercícios/Esportes Muito Difíceis &amp; Trabalho Físico ou Treinamento 2x</small>
+                </div>
+            </div>
+        </form>
+
+        <div id="result_wrapper"><br>
+            <h2 style="text-align: center;"><u>Resultado Final</u></h2>
+            <div id="result">
+                <strong><p style="text-align: justify;">Com base nas informações fornecidas, estima-se que suas necessidades
+                    diárias sejam de:</p></strong>
+                <div id="score">
+                    1000 kcal
+                </div><br>
+                <p style="text-align: justify;"><b style="color: red;">* Essa é a quantidade de calorias necessárias
+                        para manter seu peso atual.</b></p>
+                <p style="text-align: justify;"><b>Como nossa calculadora determina suas necessidades diárias de
+                        calorias? Sua ingestão diária recomendada de calorias depende de diferentes fatores, incluindo
+                        gênero, idade e atividade diária. Nossa calculadora de calorias diárias considera todas estas
+                        variáveis. O gênero, por exemplo, é crucial para o cálculo de calorias por dia. Como os homens
+                        têm geralmente um percentual de músculos maior que as mulheres, e músculos gastam calorias mais
+                        rápido que gordura, as necessidades diárias de calorias para homens são naturalmente maiores que
+                        as calorias diárias de que as mulheres necessitam. Idade também é um aspecto importante, pois
+                        com o passar dos anos o corpo queima menos calorias por dia. Ou seja, à medida que uma pessoa
+                        envelhece e o seu metabolismo fica mais lento, suas necessidades calóricas diminuem. Este é um
+                        fator que merece atenção, pois implica que as pessoas, com o passar do tempo, diminuam sua
+                        ingestão de calorias por dia, caso contrário, o resultado será aumento de peso de um ano para o
+                        outro. Por último, o estilo de vida e nível de atividade é determinante. Os que são fisicamente
+                        ativos queimam mais calorias por dia e consequentemente a quantidade de calorias necessárias por
+                        dia é maior. Além disto, os que praticam esportes regularmente e, como resultado, desenvolvem
+                        massa muscular, também têm um valor maior de ingestão recomendada de calorias.</b></p>
+                <p style="text-align: justify;"><b>Os dados apresentados não indicam necessidade de redução de calorias
+                        na alimentação diária. Caso
+                        sinta necessidade de esclarecimentos, consulte o seu médico ou farmacêutico.</b></p>
+            </div>
+        </div>
+
+        <button type="button" id="back" style="border:none;outline: none;"><i class="fa fa-angle-double-left"><b> Voltar</b></i></button>
+        <button type="button" id="proceed" style="border:none;outline: none;">Prosseguir <i class="fa fa-angle-double-right"></i></button>
+        <button type="button" id="start_over" style="border:none;outline: none;">De Novo <i class="fa fa-angle-double-right"></i></button>
+
+        <div class="clear"></div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+  https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-database.js"></script>
+
+    <script src="js/calcularCalorias.js"></script>
+</body>
+
+</html>

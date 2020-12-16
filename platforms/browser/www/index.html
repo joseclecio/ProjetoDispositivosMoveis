@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="css/spinner.css" rel="stylesheet">
+        <meta http-equiv="refresh" content="2;">
+
+</head>
+
+<body>
+
+  <div class="spinner">
+    <div class="spinner__circle">
+      <div class="spinner__circle-gradient"></div>
+      <div class="spinner__circle-inner"></div>
+    </div>
+  </div>
+
+
+  <script>
+    fetch('https://jsonplaceholder.typicode.com/todos/1').then((result) => {
+      console.log(result);
+      window.location.href = "index1.html";
+    }).catch((error) => {
+      console.log(error);
+      alert('Conecte-se a Internet');
+    }).finally((result) => {
+      document.querySelector('.spinner').style.display = 'none';
+    });
+  </script>
+</body>
+
+</html>

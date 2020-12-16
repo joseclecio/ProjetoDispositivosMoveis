@@ -1,0 +1,23 @@
+{
+  "dependencies": {},
+  "devDependencies": {
+    "cordova-android": "^9.0.0",
+    "cordova-browser": "^6.0.0",
+    "cordova-ios": "^6.1.1",
+    "cordova-plugin-console": "1.0.7",
+    "cordova-plugin-statusbar": "1.0.1",
+    "cordova-plugin-whitelist": "1.2.2"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-console": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-whitelist": {}
+    },
+    "platforms": [
+      "android",
+      "ios",
+      "browser"
+    ]
+  }
+}

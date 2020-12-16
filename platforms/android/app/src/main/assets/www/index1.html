@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <link href="css/index.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" media="screen"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" media="screen"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!--função para desativar o botão voltar do cell-->
+  <script type="text/javascript" charset="utf-8" src="js/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" charset="utf-8" src="js/jquery.mobile-1.3.2.min.js "></script>
+  <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+  <script type="text/javascript" charset="utf-8">
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+    // device APIs are available
+    // 
+    function onDeviceReady() {
+      document.addEventListener("backbutton", onBackKeyDown, false);
+    }
+    // Handle the back button
+    //
+    function onBackKeyDown() {
+      // navigator.app.exitApp();
+    }
+  </script>
+  <title>Salvando Dados no Firebase</title>
+</head>
+
+<body onselectstart="return false">
+
+  <!-- Sidebar -->
+  <div class="w3-sidebar w3-bar-block w3-animate-left bg-dark text-white" style="display:none;z-index:5;width: 70%;"id="mySidebar">
+    <button class="w3-bar-item w3-button w3-large bg-danger" onclick="w3_close()"><b>Fechar </b><i class="fa fa-close"></i></button>
+    <a href="todosProdutos.html" class="w3-bar-item bg-dark text-white" style="text-decoration: none;"><b><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;&nbsp;Todos os Alimentos</i></b></a>
+    <a href="somarCalorias.html" class="w3-bar-item bg-dark text-white" style="text-decoration: none;"><b><i class="fa fa-address-book" aria-hidden="true"></i>&nbsp;&nbsp;Minhas Calorias</b></a>
+    <a href="calcularCalorias.html" class="w3-bar-item bg-dark text-white" style="text-decoration: none;"><b><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;&nbsp;Calorias Diárias</b></a>
+    <a href="calculadoraIMC.html" class="w3-bar-item bg-dark text-white" style="text-decoration: none;"><b><i class="fa fa-calculator" aria-hidden="true"></i>&nbsp;&nbsp;Calcular IMC</b></a>
+    <a href="ajuda.html" class="w3-bar-item bg-dark text-white" style="text-decoration: none;"><b><i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp;&nbsp;Ajuda</b></a>
+    <a href="#" class="w3-bar-item bg-dark text-white" style="text-decoration: none;" onclick="funcaoSair()"><b><i class="fa fa-external-link" aria-hidden="true"></i>&nbsp;&nbsp;Sair do App</b></a>
+  </div>
+
+  <!-- Page Content -->
+  <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
+
+  <div>
+    <button class="w3-button w3-white w3-xxlarge" onclick="w3_open()"
+      style="border:none;outline: none;">&#9776;</button>
+  </div>
+
+  <h3 style="text-align: center;"><b>CATEGORIAS <i class="fa fa-list-ol" aria-hidden="true"></i>
+    </b></h1>
+    <br>
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/AlimentosDiversos.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right"
+            style="width:60px">
+          <p>
+            <h4><b>Alimentos Diversos</b></h4>
+          </p><br>
+        </div>
+        <a href="alimentosDiversos.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/AveiaGranolaSucrilhos.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right"
+            style="width:60px">
+          <p>
+            <h4><b>Aveia, Granola e Sucrilhos</b></h4>
+          </p><br>
+        </div>
+        <a href="aveiaGranola.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/BebidasAlcoolicas.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right"
+            style="width:60px">
+          <p>
+            <h4><b>Bebidas Alcoólicas</b></h4>
+          </p><br>
+        </div>
+        <a href="bebidasAlcoolicas.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/BebidasNaoAlcoolicas.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right"
+            style="width:60px">
+          <p>
+            <h4><b>Bebidas Não Alcoólicas</b></h4>
+          </p><br>
+        </div>
+        <a href="bebidasNaoAlcoolicas.html" style=" text-decoration: none;""><button
+            class=" w3-button w3-block w3-dark-grey" style="border:none;outline: none;">Ver Produtos <i
+            class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/CarnesDerivados.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Carnes e Derivados</b></h4>
+          </p><br>
+        </div>
+        <a href="carnesDerivados.html" style="text-decoration: none;""><button class=" w3-button w3-block w3-dark-grey"
+          style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/Doces.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Doces</b></h4>
+          </p><br>
+        </div>
+        <a href="doces.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver
+            Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/EspeciariasErvas.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Especiarias e Erva</b></h4>
+          </p><br>
+        </div>
+        <a href="especiariasErvas.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/FastFood.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Fast Food</b></h4>
+          </p><br>
+        </div>
+        <a href="fastFood.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver
+            Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/imagem2.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Frutas e Produtos à Base de Frutas</b></h4>
+          </p><br>
+        </div>
+        <a href="frutasProdutosBaseDeFrutas.html" style="text-decoration: none;"><button
+            class="w3-button w3-block w3-dark-grey" style="border:none;outline: none;">Ver Produtos <i
+              class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/GraosProdutos.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Grãos e Produtos à Base de Cereais</b></h4>
+          </p><br>
+        </div>
+        <a href="graosProdutosBaseCereais.html" style="text-decoration: none;"><button
+            class="w3-button w3-block w3-dark-grey" style="border:none;outline: none;">Ver Produtos <i
+              class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/IngredientesPanificao.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right"
+            style="width:60px">
+          <p>
+            <h4><b>Igredientes de Panificação</b></h4>
+          </p><br>
+        </div>
+        <a href="igredientesPanificacao.html" style="text-decoration: none;"><button
+            class="w3-button w3-block w3-dark-grey" style="border:none;outline: none;">Ver Produtos <i
+              class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/Legumes.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Legumes</b></h4>
+          </p><br>
+        </div>
+        <a href="legumes.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver
+            Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/LeitesLaticinios.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Leites e Laticínios</b></h4>
+          </p><br>
+        </div>
+        <a href="leitesLaticinios.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/MacarraoMassas.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Macarrão e Massas</b></h4>
+          </p><br>
+        </div>
+        <a href="macarraoMassas.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/MolhosCondimentos.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right"
+            style="width:60px">
+          <p>
+            <h4><b>Molhos e Condimentos Para Salada</b></h4>
+          </p><br>
+        </div>
+        <a href="molhosCondimentosParaSalada.html" style="text-decoration: none;"><button
+            class="w3-button w3-block w3-dark-grey" style="border:none;outline: none;">Ver Produtos <i
+              class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/NozesSementes.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Nozes e Sementes</b></h4>
+          </p><br>
+        </div>
+        <a href="nozesSementes.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/OleosGorduras.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Óleos e Gorduras</b></h4>
+          </p><br>
+        </div>
+        <a href="oleosGorduras.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/PastasMolhos.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Pastas e Molhos Cremosos</b></h4>
+          </p><br>
+        </div>
+        <a href="pastasMolhosCremosos.html" style="text-decoration: none;"><button
+            class="w3-button w3-block w3-dark-grey" style="border:none;outline: none;">Ver Produtos <i
+              class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/PeixesDerivados.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Peixes e Derivados</b></h4>
+          </p><br>
+        </div>
+        <a href="peixesDerivados.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/PratosRefeicoes.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Pratos e Refeições</b></h4>
+          </p><br>
+        </div>
+        <a href="pratosRefeicoes.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/ProdutosBaseBatatas.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right"
+            style="width:60px">
+          <p>
+            <h4><b>Produtos à Base de Batatas</b></h4>
+          </p><br>
+        </div>
+        <a href="produtosBaseBatata.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/ProdutosBaseSoja.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Produtos à Base de Soja</b></h4>
+          </p><br>
+        </div>
+        <a href="produtosBaseSoja.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/Queijo.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Queijo</b></h4>
+          </p><br>
+        </div>
+        <a href="queijos.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver
+            Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/SalgadosProutosConfeitaria.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right"
+            style="width:60px">
+          <p>
+            <h4><b>Salgados e Produtos de Confeitaria</b></h4>
+          </p><br>
+        </div>
+        <a href="salgadosProdutosConfeitaria.html" style="text-decoration: none;"><button
+            class="w3-button w3-block w3-dark-grey" style="border:none;outline: none;">Ver Produtos <i
+              class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/TortasBolos.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Tortas e Bolos</b></h4>
+          </p><br>
+        </div>
+        <a href="tortasBolos.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/Vegetais.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Vegetais</b></h4>
+          </p><br>
+        </div>
+        <a href="vegetais.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver
+            Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/salsicha.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Salsichas</b></h4>
+          </p><br>
+        </div>
+        <a href="salsicha.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver
+            Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/CarnesFritas.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Carnes Frias</b></h4>
+          </p><br>
+        </div>
+        <a href="carnesFrias.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/CarnesExoticas.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Carnes Exóticas</b></h4>
+          </p><br>
+        </div>
+        <a href="carnesExoticas.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/CarneAves.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Aves</b></h4>
+          </p><br>
+        </div>
+        <a href="aves.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver
+            Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/MiudosAves.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Miúdos de Aves</b></h4>
+          </p><br>
+        </div>
+        <a href="miudosDeAves.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/VitelaCarneBovina.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right"
+            style="width:60px">
+          <p>
+            <h4><b>Vitela e Carne Bovina</b></h4>
+          </p><br>
+        </div>
+        <a href="vitelaCarneBovina.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/CarnePorco.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Carne de Porco</b></h4>
+          </p><br>
+        </div>
+        <a href="carneDePorco.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <div id="espaco"></div>
+
+    <div class="w3-container">
+      <div class="w3-card-4" style="width:100%">
+        <div class="w3-container">
+          <br>
+          <img src="img/CarneVeado.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <p>
+            <h4><b>Carne de Veado e Caça</b></h4>
+          </p><br>
+        </div>
+        <a href="carneDeVeadoCaca.html" style="text-decoration: none;"><button class="w3-button w3-block w3-dark-grey"
+            style="border:none;outline: none;">Ver Produtos <i class="fa fa-angle-double-right"></i></button></a>
+      </div>
+    </div>
+
+    <br><br>
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+</body>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+  https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-database.js"></script>
+
+<script src="js/index.js"></script>
+</body>
+<footer>
+<h6 style="text-align: center; font-size: 10pt;">© Copyright 2020-2021 - Joseclecio N. C.</h6>
+<br>
+</footer>
+</html>
