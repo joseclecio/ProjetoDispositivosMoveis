@@ -7,6 +7,10 @@ Orientado pelo professor JEAN LOUIS SILVA SANTOS
 Um aplicativo para consultar as calorias de um determinado alimento, contando também com algumas ferramentas como MMC, a opção de guardar suas calorias dentre outras. Utilizei a tecnologia Cordova da Adobe e o banco foi o Firebase da Google. Usei as linguagens HTML, CSS e JavaScript apenas.
 <br><br><br>
 
+## Para acessar o arquivo Apk e baixar, vá na pasta: 
+*platforms/android/app/release* e baixe o arquivo *app-release.apk*
+<br><br><br>
+
 ## Links úteis
 
 HTML | JavaScript | Cordova | Firebase | CSS
