@@ -1,6 +1,6 @@
 # ProjetoDispositivosMoveis
 
-##Disciplina de Dispositivos Móveis do curso de Bacharelado em Sistemas de Informação do Campus IFS - Lagarto/SE
+## Disciplina de Dispositivos Móveis do curso de Bacharelado em Sistemas de Informação do Campus IFS - Lagarto/SE
 
 Orientado pelo professor JEAN LOUIS SILVA SANTOS
 
