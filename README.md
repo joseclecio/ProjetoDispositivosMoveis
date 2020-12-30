@@ -11,6 +11,9 @@ Um aplicativo para consultar as calorias de um determinado alimento, contando ta
 *platforms/android/app/release* e baixe o arquivo *app-release.apk*
 <br><br><br>
 
+## Teste a aplicação: https://testeslab-c72db.web.app/
+<br><br><br>
+
 ## Links úteis
 
 HTML | JavaScript | Cordova | Firebase | CSS
